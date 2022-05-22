@@ -8,7 +8,13 @@ import ManageAllOrder from './Component/Dashboard/ManageAllOrder';
 import ManageProducts from './Component/Dashboard/ManageProducts';
 import MyOrders from './Component/Dashboard/MyOrders';
 import MyProfile from './Component/Dashboard/MyProfile';
+import About from './Component/pages/About';
+import BusinessSummary from './Component/pages/BusinessSummary';
 import Home from './Component/pages/Home/Home';
+import Inventory from './Component/pages/Inventory';
+import Login from './Component/pages/Login';
+import Register from './Component/pages/Register';
+import Review from './Component/pages/Review';
 import Navber from './Component/Shered/Navber';
 
 
@@ -18,6 +24,12 @@ function App() {
       <Navber>
         <Routes>
           <Route path='/' element={<Home></Home>} />
+          <Route path='/review' element={<Review></Review>}></Route>
+          <Route path='/about' element={<About></About>}></Route>
+          <Route path='/inventory' element={<Inventory></Inventory>}></Route>
+          <Route path='/login' element={<Login></Login>}></Route>
+          <Route path='/register' element={<Register></Register>}></Route>
+          <Route path='/summary' element={<BusinessSummary></BusinessSummary>}></Route>
           <Route path='/dashboard' element={<Dashboard></Dashboard>}>
             <Route path='myOrder' element={<MyOrders />}></Route>
             <Route path='profile' element={<MyProfile />}></Route>
@@ -27,6 +39,7 @@ function App() {
             <Route path='makeAdmin' element={<AddAdmin />}></Route>
             <Route path='manageProducts' element={<ManageProducts />}></Route>
           </Route>
+
         </Routes>
 
       </Navber>
