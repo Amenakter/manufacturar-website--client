@@ -1,8 +1,12 @@
+import { signOut } from 'firebase/auth';
 import React, { useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { NavLink, useLocation } from 'react-router-dom';
+import auth from '../../firebase.intit';
 
 const Navber = ({ children }) => {
     const [dark, setDark] = useState(false);
+    const [user] = useAuthState(auth)
     const { pathname } = useLocation()
     return (
         <div>
@@ -46,7 +50,17 @@ const Navber = ({ children }) => {
                                 <li><NavLink to='/review' className='rounded-lg'>Review</NavLink ></li>
                                 <li><NavLink to='/inventory' className='rounded-lg'>Inventory</NavLink ></li>
                                 <li><NavLink to='/summary' className='rounded-lg'>Business Summary</NavLink ></li>
-                                <li><NavLink to='/login' className='rounded-lg'>Login</NavLink ></li>
+                                {
+                                    user ?
+                                        <li>
+                                            <NavLink to='/login' className='rounded-lg' onClick={() => signOut(auth)}>SignOut</NavLink >
+                                        </li>
+                                        :
+                                        <li>
+                                            <NavLink to='/login' className='rounded-lg'>Login</NavLink >
+                                        </li>
+
+                                }
                                 <li class="dropdown dropdown-hover dropdown-end">
                                     <label tabindex="0"
                                         class="btn btn-primary m-1 rounded-lg  btn-outline ">
@@ -54,7 +68,13 @@ const Navber = ({ children }) => {
                                     </label>
                                     <ul tabindex="0"
                                         class="dropdown-content menu p-2 shadowx bg-base-100 rounded-box w-52">
-                                        <li><NavLink to='/profileSetting'>Your Profile</NavLink></li>
+                                        {user ?
+                                            <li><NavLink to='/profile'>Your Profile</NavLink></li>
+                                            :
+                                            <li><NavLink to='/register'>Register</NavLink></li>
+
+                                        }
+
                                         <li>
 
                                             <label class="swap swap-rotate bg-info">
@@ -76,7 +96,7 @@ const Navber = ({ children }) => {
                     <ul class="menu p-4 overflow-y-auto w-80 bg-base-100">
                         {/* <!-- Sidebar content here --> */}
                         <li><NavLink to='/' className='rounded-lg'>Home</NavLink ></li>
-                        <li><NavLink to='/Dashboard' className='rounded-lg'>Dashboard</NavLink ></li>
+                        <li><NavLink to='/dashboard' className='rounded-lg'>Dashboard</NavLink ></li>
                         <li><NavLink to='/about' className='rounded-lg'>About</NavLink ></li>
                         <li><NavLink to='/review' className='rounded-lg'>Review</NavLink ></li>
                         <li><NavLink to='/inventory' className='rounded-lg'>Inventory</NavLink ></li>
@@ -87,7 +107,7 @@ const Navber = ({ children }) => {
                                 Settings
                             </div>
                             <div class="collapse-content">
-                                <li><NavLink to='/profileSetting'>Your Profile</NavLink></li>
+                                <li><NavLink to='/profile'>Your Profile</NavLink></li>
                                 <li>
                                     <label class="swap swap-rotate bg-info">
                                         <input type="checkbox" onClick={() => setDark(!dark)} />

@@ -1,10 +1,32 @@
 import React from 'react';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import auth from '../../firebase.intit';
+import Loading from '../Shered/Loading';
 
 const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const onSubmit = data => console.log(data);
+    const [createUserWithEmailAndPassword, user, loading, error,] = useCreateUserWithEmailAndPassword(auth);
+    const navigate = useNavigate()
+    if (loading) {
+        return <Loading></Loading>
+    }
+    if (error) {
+        console.log(error.message)
+    }
+    if (user) {
+        navigate('/')
+    }
+    const onSubmit = data => {
+        console.log(data);
+        // const name = data.name;
+        const email = data.email;
+        const password = data.password;
+        // console.log(name, email, password);
+        createUserWithEmailAndPassword(email, password)
+
+    };
     return (
         <div>
             <div class="hero h-screen bg-base-100">

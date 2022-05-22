@@ -1,10 +1,32 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.intit'
+import Loading from '../Shered/Loading';
 
 const Login = () => {
-    const { register, formState: { errors }, handleSubmit } = useForm();
-    const onSubmit = data => console.log(data);
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
+    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+    const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location?.state?.from?.pathname || '/';
+    let authenticationError;
+    if (gLoading || loading) {
+        return <Loading></Loading>
+    }
+    if (gError || error) {
+        authenticationError = <p className='text-red-500'>{error?.message} || {gError?.message}</p>
+    }
+    if (user || gUser) {
+        navigate(from, { replace: true })
+    }
+    const onSubmit = data => {
+        console.log(data)
+        signInWithEmailAndPassword(data.email, data.password)
+        reset();
+    };
     return (
         <div>
             <div class="hero h-screen bg-base-100">
@@ -67,10 +89,18 @@ const Login = () => {
                             <div class="label">
                                 <p className='label-text  font-bold '>If Haven't Account, <Link to="/register" class="label-text-alt link text-xs font-bold text-success">Create an Account</Link></p>
                             </div>
+                            {authenticationError}
                             <div class="form-control mt-6">
                                 <button class="btn btn-primary">Login</button>
                             </div>
+
                         </form>
+
+                        <div class="divider">OR</div>
+                        <div class="form-control mt-6">
+                            <button class="btn btn-outline hover:btn-primary" onClick={() => signInWithGoogle()}>Countinue with Google</button>
+                        </div>
+
                     </div>
                 </div>
             </div>
