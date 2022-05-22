@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import { async } from '@firebase/util';
 
 const AddInventory = () => {
     const { register, handleSubmit, reset } = useForm();
     const [uploadimage, setUploadImage] = useState('');
-    const onSubmit = data => {
+    const onSubmit = async (data) => {
         const addItem = {
             ProductName: data.name,
             price: data.price,
@@ -14,7 +15,8 @@ const AddInventory = () => {
             image: uploadimage
         }
         console.log(addItem);
-
+        const res = await axios.post('http://localhost:5000/addProducts', addItem)
+        console.log(res.data);
         reset();
     };
     const handleUploadImage = event => {
