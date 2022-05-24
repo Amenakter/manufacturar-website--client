@@ -73,7 +73,7 @@ const Navber = ({ children }) => {
                                     <ul tabindex="0"
                                         class="dropdown-content menu p-2 shadowx bg-base-100 rounded-box w-52">
                                         {user ?
-                                            <li><NavLink to='/profile'>Your Profile</NavLink></li>
+                                            <li className='mb-4'><NavLink to='/profile'>Your Profile</NavLink></li>
                                             :
                                             <li><NavLink to='/register'>Register</NavLink></li>
 
@@ -110,8 +110,8 @@ const Navber = ({ children }) => {
                             <div class="collapse-title text-xl font-medium">
                                 Settings
                             </div>
-                            <div class="collapse-content">
-                                <li><NavLink to='/profile'>Your Profile</NavLink></li>
+                            <div class="collapse-content ">
+                                <li className='mb-4'><NavLink to='/profile'>Your Profile</NavLink></li>
                                 <li>
                                     <label class="swap swap-rotate bg-info">
                                         <input type="checkbox" onClick={() => setDark(!dark)} />
