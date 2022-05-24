@@ -14,9 +14,12 @@ import BusinessSummary from './Component/pages/BusinessSummary';
 import Home from './Component/pages/Home/Home';
 import Inventory from './Component/pages/Inventory';
 import Login from './Component/pages/Login';
+import Purchase from './Component/pages/Purchase';
 import Register from './Component/pages/Register';
 import Review from './Component/pages/Review';
 import Navber from './Component/Shered/Navber';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
@@ -35,6 +38,7 @@ function App() {
           <Route path='/login' element={<Login></Login>}></Route>
           <Route path='/register' element={<Register></Register>}></Route>
           <Route path='/summary' element={<BusinessSummary></BusinessSummary>}></Route>
+          <Route path='/purchase/:id' element={<Purchase></Purchase>}></Route>
 
           <Route path='/dashboard' element={
             <RequiredAuth>
@@ -57,6 +61,7 @@ function App() {
         </Routes>
 
       </Navber>
+      <ToastContainer></ToastContainer>
     </div>
 
 

@@ -1,30 +1,42 @@
 import React from 'react';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import auth from '../../firebase.intit';
 import Loading from '../Shered/Loading';
 
 const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [createUserWithEmailAndPassword, user, loading, error,] = useCreateUserWithEmailAndPassword(auth);
+    const [updateProfile, updating, UpdateError] = useUpdateProfile(auth);
     const navigate = useNavigate()
-    if (loading) {
+
+    if (loading || updating) {
         return <Loading></Loading>
     }
-    if (error) {
+    if (error || UpdateError) {
         console.log(error.message)
     }
     if (user) {
+        console.log(user);
         navigate('/')
     }
-    const onSubmit = data => {
+    const onSubmit = async (data) => {
         console.log(data);
-        // const name = data.name;
+        const name = data.name;
         const email = data.email;
         const password = data.password;
+        const ConfirmPassword = data.ConPassword;
         // console.log(name, email, password);
-        createUserWithEmailAndPassword(email, password)
+        if (password === ConfirmPassword) {
+            await createUserWithEmailAndPassword(email, password)
+            await updateProfile({ displayName: name })
+        }
+        else {
+            toast("Password not matching")
+        }
+
 
     };
     return (
@@ -90,6 +102,30 @@ const Register = () => {
                                     placeholder="password"
                                     class="input input-bordered"
                                     {...register("password", {
+                                        required: {
+                                            value: true,
+                                            message: "Password is requireds"
+                                        },
+                                        minLength: {
+                                            value: 8,
+                                            message: 'password will be 8 character or longer'
+                                        }
+                                    })}
+                                />
+                                <label className="label">
+                                    {errors.password?.type === 'required' && <span className="label-text-alt text-red-500 font-bold">{errors.password.message}</span>}
+                                    {errors.password?.type === 'minLength' && <span className="label-text-alt text-red-500 font-bold">{errors.password.message}</span>}
+
+                                </label>
+                            </div>
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text  font-bold">Confirm Password</span>
+                                </label>
+                                <input type="password"
+                                    placeholder="password"
+                                    class="input input-bordered"
+                                    {...register("ConPassword", {
                                         required: {
                                             value: true,
                                             message: "Password is requireds"

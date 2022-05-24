@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import { async } from '@firebase/util';
+
 
 const AddInventory = () => {
     const { register, handleSubmit, reset } = useForm();
@@ -10,7 +10,8 @@ const AddInventory = () => {
         const addItem = {
             ProductName: data.name,
             price: data.price,
-            quentity: data.quentity,
+            avaliableQuentity: data.availableQuentity,
+            minimumQuentity: data.minimumQuentity,
             description: data.description,
             image: uploadimage
         }
@@ -65,12 +66,23 @@ const AddInventory = () => {
                         </div>
                         <div class="form-control">
                             <label class="label">
-                                <span class="label-text  font-bold">Quentity</span>
+                                <span class="label-text  font-bold"> available Quentity</span>
                             </label>
                             <input type="text"
                                 placeholder="quentity"
                                 class="input input-bordered"
-                                {...register("quentity",)}
+                                {...register("availableQuentity",)}
+                            />
+
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text  font-bold"> minimum Quentity</span>
+                            </label>
+                            <input type="text"
+                                placeholder="quentity"
+                                class="input input-bordered"
+                                {...register("minimumQuentity",)}
                             />
 
                         </div>
