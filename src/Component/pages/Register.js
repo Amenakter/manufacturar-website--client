@@ -1,25 +1,27 @@
 import React from 'react';
-import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.intit';
+import useToken from '../hook/useToken';
 import Loading from '../Shered/Loading';
 
 const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     const [createUserWithEmailAndPassword, user, loading, error,] = useCreateUserWithEmailAndPassword(auth);
     const [updateProfile, updating, UpdateError] = useUpdateProfile(auth);
     const navigate = useNavigate()
-
-    if (loading || updating) {
+    const [token] = useToken(user || gUser);
+    let authenticationError;
+    if (loading || updating || gLoading) {
         return <Loading></Loading>
     }
-    if (error || UpdateError) {
-        console.log(error.message)
+    if (error || UpdateError || gError) {
+        authenticationError = <p>{error?.message || UpdateError?.message || gError?.message}</p>
     }
-    if (user) {
-        console.log(user);
+    if (token) {
         navigate('/')
     }
     const onSubmit = async (data) => {
@@ -28,7 +30,7 @@ const Register = () => {
         const email = data.email;
         const password = data.password;
         const ConfirmPassword = data.ConPassword;
-        // console.log(name, email, password);
+
         if (password === ConfirmPassword) {
             await createUserWithEmailAndPassword(email, password)
             await updateProfile({ displayName: name })
@@ -145,11 +147,17 @@ const Register = () => {
                             <div class="label">
                                 <p className='label-text  font-bold' >Already have an account ,<Link to="/login" class="label-text-alt link text-xs font-bold text-success"> Please login</Link></p>
                             </div>
+                            {authenticationError}
                             <div class="form-control mt-6">
                                 <button class="btn btn-primary">Register</button>
                             </div>
                         </form>
+                        <div class="divider">OR</div>
+                        <div class="form-control mt-6">
+                            <button class="btn btn-outline hover:btn-primary" onClick={() => signInWithGoogle()}>Countinue with Google</button>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
