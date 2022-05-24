@@ -19,7 +19,7 @@ const MyOrders = () => {
             }
         })
             .then(res => {
-                console.log(res);
+
                 if (res.status === 401 || res.status === 403) {
                     navigate('/')
                     signOut(auth)
@@ -31,7 +31,7 @@ const MyOrders = () => {
             .then(data => {
                 setOrders(data);
             })
-    }, [user])
+    }, [navigate, user])
     return (
         <div>
             <h2 className='text-2xl font-bold text-center mb-8 text-success'>Your orders Details</h2>

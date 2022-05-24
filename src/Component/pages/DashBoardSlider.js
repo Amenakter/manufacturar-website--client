@@ -8,7 +8,7 @@ const DashBoardSlider = ({ children }) => {
     return (
         <div class="drawer drawer-mobile bg-neutral mt-8">
             <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
-            <div class="drawer-content flex flex-col items-center justify-center">
+            <div class="drawer-content w-full flex flex-col justify-center">
                 {children}
             </div>
             <div class="drawer-side">
