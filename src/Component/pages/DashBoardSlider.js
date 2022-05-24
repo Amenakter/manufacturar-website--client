@@ -23,7 +23,7 @@ const DashBoardSlider = ({ children }) => {
 
                     <li><NavLink to='/dashboard/manageAllorders'>Manage All Orders</NavLink></li>
                     <li><NavLink to='/dashboard/addProduct'>Add Product</NavLink></li>
-                    <li><NavLink to='/dashboard/makeAdmin'>Make Admin</NavLink></li>
+                    <li><NavLink to='/dashboard/makeAdmin'>Add Admin</NavLink></li>
                     <li><NavLink to='/dashboard/manageProducts'>Manage Products</NavLink></li>
 
 

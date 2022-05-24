@@ -8,6 +8,10 @@ const Navber = ({ children }) => {
     const [dark, setDark] = useState(false);
     const [user] = useAuthState(auth)
     const { pathname } = useLocation()
+    const userSingOut = () => {
+        signOut(auth)
+        localStorage.removeItem('accessToken');
+    }
     return (
         <div>
             <div class="drawer drawer-end" data-theme={dark ? "dark" : "light"}>
@@ -53,7 +57,7 @@ const Navber = ({ children }) => {
                                 {
                                     user ?
                                         <li>
-                                            <NavLink to='/login' className='rounded-lg' onClick={() => signOut(auth)}>SignOut</NavLink >
+                                            <NavLink to='/login' className='rounded-lg' onClick={userSingOut}>SignOut</NavLink >
                                         </li>
                                         :
                                         <li>
