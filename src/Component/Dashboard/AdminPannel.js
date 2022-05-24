@@ -1,7 +1,8 @@
 import React from 'react';
+import { toast } from 'react-toastify'
 
-const AdminPannel = ({ user }) => {
-    const { email } = user
+const AdminPannel = ({ user, refetch }) => {
+    const { email, role } = user
     const makeAdmin = () => {
 
 
@@ -11,18 +12,26 @@ const AdminPannel = ({ user }) => {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }
         })
-            .then(res => res.json())
+            .then(res => {
+                if (res.status === 403) {
+                    toast.error("faild to make an admin")
+                }
+                return res.json()
+            })
             .then(data => {
-                console.log(data);
+                if (data.modifiedCount) {
+                    refetch();
+                    toast.success("Successfully made admin")
+                }
             })
     }
     return (
 
         <tr>
-            <th>1</th>
+
             <td>{user.email}</td>
-            <td><button onClick={makeAdmin} className='btn btn-xs btn-primary'>Make admin</button></td>
-            <td><button className='btn btn-xs btn-primary'>Remove admin</button></td>
+            <td>{role !== "admin" && <button onClick={makeAdmin} className='btn btn-xs btn-primary'>Make admin</button>}</td>
+            <td><button className='btn btn-xs btn-primary'>Remove user</button></td>
         </tr>
 
     );

@@ -49,7 +49,7 @@ const Navber = ({ children }) => {
                             <ul class="menu menu-horizontal">
                                 {/* <!-- Navbar menu content here --> */}
                                 <li><NavLink to='/' className='rounded-lg'>Home</NavLink ></li>
-                                <li><NavLink to='/dashboard' className='rounded-lg'>Dashboard</NavLink ></li>
+                                <li><NavLink to='/dashboard/myOrder' className='rounded-lg'>Dashboard</NavLink ></li>
                                 <li><NavLink to='/about' className='rounded-lg'>About</NavLink ></li>
                                 <li><NavLink to='/review' className='rounded-lg'>Review</NavLink ></li>
                                 <li><NavLink to='/inventory' className='rounded-lg'>Inventory</NavLink ></li>
