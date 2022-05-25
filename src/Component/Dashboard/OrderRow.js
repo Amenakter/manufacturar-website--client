@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
 const OrderRow = ({ orders, index, refetch }) => {
-    const [shipped, setShipped] = useState(false)
-    const [DeleteOrder, setDeleteOrder] = useState([])
+    const [shipped, setShipped] = useState()
+    const [Deleted, setDeleted] = useState([])
 
     const { _id, email, productname, userQuentity, price, paid } = orders
 
     const toggle = () => {
         shipped ? setShipped(false) : setShipped(true)
+
     }
     const handleDeleteOrder = (id) => {
         console.log(id);
@@ -18,8 +19,8 @@ const OrderRow = ({ orders, index, refetch }) => {
             .then(res => res.json())
             .then(data => {
                 if (data.deletedCount > 0) {
-                    const remaingOrder = DeleteOrder.filter(delorders => delorders._id !== id)
-                    setDeleteOrder(remaingOrder);
+                    const remaingOrder = Deleted.filter(delorders => delorders._id !== id)
+                    setDeleted(remaingOrder);
                     refetch();
                     toast.success('Order Removed Successfully')
 
@@ -58,10 +59,10 @@ const OrderRow = ({ orders, index, refetch }) => {
             <div class="modal">
                 <div class="modal-box relative">
                     <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                    <h3 class="text-lg font-bold">Congratulations random Interner user!</h3>
-                    <p class="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
+                    <h3 class="text-lg font-bold text-info text-center">Confirm ME!!!</h3>
+                    <p class="py-4  text-success text-bold">Are you sure, you want to <span className='text-red-500 text-bold'> delete</span> this order?</p>
                     <div class="modal-action">
-                        <button class="btn btn-warning" onClick={() => handleDeleteOrder(_id)}  >YES</button>
+                        <button class="btn btn-xs btn-warning" onClick={() => handleDeleteOrder(_id)}  >YES</button>
                     </div>
                 </div>
             </div>

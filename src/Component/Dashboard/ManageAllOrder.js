@@ -1,15 +1,11 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import { Link } from 'react-router-dom';
 import DeleteOrder from '../hook/DeleteOrder';
 import Loading from '../Shered/Loading';
 
 import OrderRow from './OrderRow';
 
 const ManageAllOrder = () => {
-
-
-
     const { data: allOrders, isLoading, refetch } = useQuery('users', () => fetch('http://localhost:5000/allOrders').then(res => res.json()))
 
     if (isLoading) {
@@ -55,6 +51,7 @@ const ManageAllOrder = () => {
                     allOrders?.map(order => <DeleteOrder
                         order={order}
                         key={order._id}
+                        refetch={refetch}
                     ></DeleteOrder>
                     )
                 }

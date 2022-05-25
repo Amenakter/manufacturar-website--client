@@ -11,7 +11,7 @@ const Products = ({ inventories }) => {
     }
     return (
         <div >
-            <div class="card lg:w-96 w-full bg-neutral sshadow-xl">
+            <div class="card lg:w-80 w-full bg-neutral sshadow-xl ">
                 <figure className='px-4 pt-4' >
                     <img height='80px' src={image} alt="Shoes" class="rounded-xl" />
                 </figure>
@@ -20,7 +20,7 @@ const Products = ({ inventories }) => {
                     <p >{description}</p>
                     <p >Price: $<span className='font-bold'>{price} (per unit price)</span></p>
                     <div className='flex justify-between items-center '>
-                        <p >Available quentity:<span className='font-bold'> {avaliableQuentity}</span></p>
+                        <p  >Available quentity:<span className='font-bold'> {avaliableQuentity}</span></p>
                         <p >Minimum quentity:<span className='font-bold'> {minimumQuentity}</span></p>
                     </div>
                     <div class="card-actions">

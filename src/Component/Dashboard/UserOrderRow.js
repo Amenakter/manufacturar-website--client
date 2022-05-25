@@ -10,6 +10,10 @@ const UserOrderRow = ({ order, index, refetch }) => {
 
         fetch(`http://localhost:5000/orders/${id}`, {
             method: "DELETE",
+            headers: {
+                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+
+            }
         })
             .then(res => res.json())
             .then(data => {
@@ -49,10 +53,10 @@ const UserOrderRow = ({ order, index, refetch }) => {
             <div class="modal">
                 <div class="modal-box relative">
                     <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                    <h3 class="text-lg font-bold">Congratulations random Interner user!</h3>
-                    <p class="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
+                    <h3 class="text-lg font-bold text-info text-center">Confirm ME!!!</h3>
+                    <p class="py-4 text-success text-bold ">Are you sure, Do you want to <span className='text-red-500 text-bold'>Delete </span> this order?</p>
                     <div class="modal-action">
-                        <button class="btn btn-warning" onClick={() => handleDeleteUserOrder(_id)}  >YES</button>
+                        <button class="btn btn-xs btn-warning " onClick={() => handleDeleteUserOrder(_id)}  >YES</button>
                     </div>
                 </div>
             </div>

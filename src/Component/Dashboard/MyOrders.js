@@ -75,6 +75,7 @@ const MyOrders = () => {
                         <DeleteOrder
                             order={order}
                             key={order._id}
+                            refetch={refetch}
                         ></DeleteOrder>
                     )
                 }
