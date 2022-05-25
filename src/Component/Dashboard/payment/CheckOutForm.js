@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { async } from '@firebase/util';
+import Loading from '../../Shered/Loading';
 
 
 const CheckOutForm = ({ orders }) => {
     const [cardError, setCardError] = useState('')
     const [success, setSuccess] = useState('')
+    const [transactionId, setTransactionId] = useState('')
+    const [processing, setProcessing] = useState(false)
     const [clientSecret, setClientSecret] = useState('')
     const stripe = useStripe();
     const elements = useElements();
 
-    const { price, email, name } = orders
+    const { _id, price, email, name } = orders
 
 
     useEffect(() => {
@@ -46,9 +49,14 @@ const CheckOutForm = ({ orders }) => {
             card,
         });
 
+
         setCardError(error?.message || ' ')
         setSuccess('')
+        setProcessing(true)
 
+        if (processing) {
+            return <Loading></Loading>
+        }
         //confirm card payment
         const { paymentIntent, error: intentError } = await stripe.confirmCardPayment(
             clientSecret,
@@ -64,14 +72,32 @@ const CheckOutForm = ({ orders }) => {
         );
         if (intentError) {
             setCardError(intentError?.message)
-
+            setProcessing(false)
         }
         else {
             setCardError('')
-            console.log(paymentIntent);
+            setTransactionId(paymentIntent.id)
             setSuccess('Your payment is success')
         }
 
+        //payment store
+        const payment = {
+            orderId: _id,
+            transactionId: paymentIntent.id,
+        }
+        fetch(`http://localhost:5000/order/${_id}`, {
+            method: "PATCH",
+            headers: {
+                'content-type': "application/json",
+                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            },
+            body: JSON.stringify(payment)
+        })
+            .then(res => res.json())
+            .then(data => {
+                setProcessing(false)
+                console.log(data)
+            })
 
     }
     return (
@@ -101,7 +127,11 @@ const CheckOutForm = ({ orders }) => {
                 cardError && <p className='text-red-500'>{cardError}</p>
             }
             {
-                success && <p className='text-green-500'>{success}</p>
+                success &&
+                <div className='text-green-500'>
+                    <p>{success}</p>
+                    <p >Your transaction Id: <span className='text-xs text-info font-bold'>{transactionId}</span> </p>
+                </div>
             }
         </div>
     );

@@ -45,9 +45,9 @@ const MyOrders = () => {
                             <th>Product</th>
                             <th >quentity</th>
                             <th>Total Amount</th>
-                            <th>Payment</th>
-                            <th>Dismiss</th>
-                            <th></th>
+                            <th>Payment status</th>
+
+
                         </tr>
                     </thead>
                     <tbody>
@@ -58,9 +58,16 @@ const MyOrders = () => {
                                 <td>{order.productname}</td>
                                 <td>{order.userQuentity}</td>
                                 <td>{order.userQuentity * order.price}</td>
-                                <td>{(order.price && !order.paid) && <Link to={`/dashboard/payment/${order._id}`} > <button className='btn btn-warning btn-xs' >Pay Now</button></Link>} </td>
-                                <td>{(order.price && !order.paid) && <button className='btn btn-error btn-xs' >cancle</button>} </td>
-                                <td>{(order.price && order.paid) && <span className='text-success' >Paid</span>} </td>
+                                <td><div class="justify-end">
+                                    {(order.price && !order.paid) && <Link to={`/dashboard/payment/${order._id}`} > <button className='btn btn-warning btn-xs' >Pay Now</button></Link>}
+                                    {(order.price && !order.paid) && <button className='btn btn-error btn-xs ml-4' >cancle</button>}
+                                    {(order.price && order.paid) && <div>
+                                        <p className='text-success font-bold' >Paid</p>
+                                        <p className='text-info ' >{order.transactionId}</p>
+                                    </div>}
+                                </div></td>
+                                {/* <td>{(order.price && order.paid) && <span className='text-success' >Paid</span>}</td> */}
+
                             </tr>)
                         }
 
@@ -81,7 +88,7 @@ const MyOrders = () => {
                                     <p>Order quentity : {order.userQuentity}</p>
                                     <p> Total price: {order.userQuentity * order.price}</p>
                                     <div class="card-actions justify-end">
-                                        {(order.price && !order.paid) && <Link to={`/payment/${order._id}`} > <button className='btn btn-warning btn-xs' >Pay Now</button></Link>}
+                                        {(order.price && !order.paid) && <Link to={`/dashboard/payment/${order._id}`} > <button className='btn btn-warning btn-xs' >Pay Now</button></Link>}
                                         {(order.price && !order.paid) && <button className='btn btn-error btn-xs' >cancle</button>}
                                         {(order.price && order.paid) && <span className='text-success' >Paid</span>}
                                     </div>

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 
 const ManageAllOrder = () => {
     const [allOrders, setAllOrders] = useState([]);
+    const [shipped, setShipped] = useState(false)
 
     useEffect(() => {
         fetch('http://localhost:5000/allOrders')
@@ -11,6 +11,11 @@ const ManageAllOrder = () => {
                 setAllOrders(data)
             })
     }, [])
+
+    // shipped button toggole
+    const toggle = () => {
+        shipped ? setShipped(false) : setShipped(true)
+    }
     return (
         <div>
             <h2>total orders:{allOrders.length}</h2>
@@ -24,9 +29,9 @@ const ManageAllOrder = () => {
                             <th>Product</th>
                             <th >quentity</th>
                             <th>Total Amount</th>
-                            <th>Payment</th>
-                            <th>Dismiss</th>
-                            <th></th>
+                            <th>User Payment Status</th>
+
+
                         </tr>
                     </thead>
                     <tbody>
@@ -37,9 +42,18 @@ const ManageAllOrder = () => {
                                 <td>{order.productname}</td>
                                 <td>{order.userQuentity}</td>
                                 <td>{order.userQuentity * order.price}</td>
-                                <td>{(order.price && !order.paid) && <Link to={`/`} > <button className='btn btn-warning btn-xs' >Unpaid</button></Link>} </td>
-                                <td>{(order.price && !order.paid) && <button className='btn btn-error btn-xs' >cancle</button>} </td>
-                                <td>{(order.price && order.paid) && <span className='text-success' >Paid</span>} </td>
+                                <td>
+                                    <div class="justify-end">
+                                        {(order.price && !order.paid) && <button className='btn btn-warning btn-xs' >Unpaid</button>}
+                                        {(order.price && !order.paid) && <button className='btn btn-error btn-xs ml-4' >cancle</button>}
+                                        {(order.price && order.paid) && <div className='flex justify-end'>
+                                            {!shipped ? <p className='text-success font-bold' >panding</p> : <p className='text-success font-bold' >shipped</p>}
+                                            <div>
+                                                <button onClick={toggle} className='btn btn-xs btn-info ml-4' >uptade Status</button>
+                                            </div>
+                                        </div>}
+                                    </div>
+                                </td>
                             </tr>)
                         }
 
