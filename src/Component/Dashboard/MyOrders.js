@@ -1,37 +1,40 @@
 import { signOut } from 'firebase/auth';
-import React, { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import auth from '../../firebase.intit';
+import UserOrderRow from './UserOrderRow';
+import DeleteOrder from '../hook/DeleteOrder';
 
 const MyOrders = () => {
-    const [orders, setOrders] = useState([])
     const [user] = useAuthState(auth)
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const email = user.email
-        fetch(`http://localhost:5000/order?email=${email}`, {
-            method: "GET",
-            headers: {
-                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
 
+    const email = user.email
+    const { data: orders, refetch } = useQuery(['oders', email], () => fetch(`http://localhost:5000/order?email=${email}`, {
+        method: "GET",
+        headers: {
+            'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+
+        }
+    })
+
+        .then(res => {
+
+            if (res.status === 401 || res.status === 403) {
+                navigate('/')
+                signOut(auth)
+                localStorage.removeItem('accessToken')
             }
+            return res.json();
+
         })
-            .then(res => {
 
-                if (res.status === 401 || res.status === 403) {
-                    navigate('/')
-                    signOut(auth)
-                    localStorage.removeItem('accessToken')
-                }
-                return res.json();
+    )
 
-            })
-            .then(data => {
-                setOrders(data);
-            })
-    }, [navigate, user])
+
+
     return (
         <div>
             <h2 className='text-2xl font-bold text-center mb-8 text-success'>Your orders Details</h2>
@@ -52,23 +55,14 @@ const MyOrders = () => {
                     </thead>
                     <tbody>
                         {
-                            orders?.map((order, index) => <tr>
-                                <th>{index + 1}</th>
-                                <td>{order.email}</td>
-                                <td>{order.productname}</td>
-                                <td>{order.userQuentity}</td>
-                                <td>{order.userQuentity * order.price}</td>
-                                <td><div class="justify-end">
-                                    {(order.price && !order.paid) && <Link to={`/dashboard/payment/${order._id}`} > <button className='btn btn-warning btn-xs' >Pay Now</button></Link>}
-                                    {(order.price && !order.paid) && <button className='btn btn-error btn-xs ml-4' >cancle</button>}
-                                    {(order.price && order.paid) && <div>
-                                        <p className='text-success font-bold' >Paid</p>
-                                        <p className='text-info ' >{order.transactionId}</p>
-                                    </div>}
-                                </div></td>
-                                {/* <td>{(order.price && order.paid) && <span className='text-success' >Paid</span>}</td> */}
+                            orders?.map((order, index) => <UserOrderRow
+                                key={order._id}
+                                order={order}
+                                index={index}
+                                refetch={refetch}
+                            >
 
-                            </tr>)
+                            </UserOrderRow>)
                         }
 
                     </tbody>
@@ -76,26 +70,15 @@ const MyOrders = () => {
             </div>
 
             <div className=' grid grid-cols-1 gap-4 md:hidden mt-20'>
-
-
                 {
-                    orders.map(order =>
-                        <div className='flex items-center justify-center space-x-2 text-sm'>
-                            <div class="card w-96 bg-white shadow-xl">
-                                <div class="card-body">
-                                    <h2 class="card-title text-primary ">Product : {order.productname}</h2>
-                                    <p className='font-bold'>Email : {order.email}</p>
-                                    <p>Order quentity : {order.userQuentity}</p>
-                                    <p> Total price: {order.userQuentity * order.price}</p>
-                                    <div class="card-actions justify-end">
-                                        {(order.price && !order.paid) && <Link to={`/dashboard/payment/${order._id}`} > <button className='btn btn-warning btn-xs' >Pay Now</button></Link>}
-                                        {(order.price && !order.paid) && <button className='btn btn-error btn-xs' >cancle</button>}
-                                        {(order.price && order.paid) && <span className='text-success' >Paid</span>}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>)
+                    orders?.map(order =>
+                        <DeleteOrder
+                            order={order}
+                            key={order._id}
+                        ></DeleteOrder>
+                    )
                 }
+
 
             </div>
 

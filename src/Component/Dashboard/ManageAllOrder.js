@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
+import DeleteOrder from '../hook/DeleteOrder';
+import Loading from '../Shered/Loading';
+
+import OrderRow from './OrderRow';
 
 const ManageAllOrder = () => {
-    const [allOrders, setAllOrders] = useState([]);
-    const [shipped, setShipped] = useState(false)
 
-    useEffect(() => {
-        fetch('http://localhost:5000/allOrders')
-            .then(res => res.json())
-            .then(data => {
-                setAllOrders(data)
-            })
-    }, [])
 
-    // shipped button toggole
-    const toggle = () => {
-        shipped ? setShipped(false) : setShipped(true)
+
+    const { data: allOrders, isLoading, refetch } = useQuery('users', () => fetch('http://localhost:5000/allOrders').then(res => res.json()))
+
+    if (isLoading) {
+        return <Loading></Loading>
     }
+
     return (
         <div>
             <h2>total orders:{allOrders.length}</h2>
@@ -36,29 +36,29 @@ const ManageAllOrder = () => {
                     </thead>
                     <tbody>
                         {
-                            allOrders?.map((order, index) => <tr>
-                                <th>{index + 1}</th>
-                                <td>{order.email}</td>
-                                <td>{order.productname}</td>
-                                <td>{order.userQuentity}</td>
-                                <td>{order.userQuentity * order.price}</td>
-                                <td>
-                                    <div class="justify-end">
-                                        {(order.price && !order.paid) && <button className='btn btn-warning btn-xs' >Unpaid</button>}
-                                        {(order.price && !order.paid) && <button className='btn btn-error btn-xs ml-4' >cancle</button>}
-                                        {(order.price && order.paid) && <div className='flex justify-end'>
-                                            {!shipped ? <p className='text-success font-bold' >panding</p> : <p className='text-success font-bold' >shipped</p>}
-                                            <div>
-                                                <button onClick={toggle} className='btn btn-xs btn-info ml-4' >uptade Status</button>
-                                            </div>
-                                        </div>}
-                                    </div>
-                                </td>
-                            </tr>)
+                            allOrders?.map((orders, index) =>
+                                <OrderRow
+                                    key={orders._id}
+                                    orders={orders}
+                                    index={index}
+                                    refetch={refetch}
+                                ></OrderRow>
+                            )
                         }
 
                     </tbody>
                 </table>
+            </div>
+
+            <div className=' grid grid-cols-1 gap-4 md:hidden mt-20'>
+                {
+                    allOrders?.map(order => <DeleteOrder
+                        order={order}
+                        key={order._id}
+                    ></DeleteOrder>
+                    )
+                }
+
             </div>
         </div>
     );

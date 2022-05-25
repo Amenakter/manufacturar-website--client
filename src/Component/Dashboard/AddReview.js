@@ -37,8 +37,11 @@ const AddReview = () => {
 
     }
     return (
-        <div className='flex justify-center items-center'>
-            <div class="card flex-shrink-0 w-full  max-w-sm  ">
+        <div className='lg:flex justify-center items-center lg:flex-row-reverse'>
+            <div className='lg:w-3/4  '>
+                <img src={img} alt="" />
+            </div>
+            <div class="card flex-shrink-0 lg:w-full  max-w-sm  ">
                 <form onSubmit={handleSubmit}>
                     <div class="card-body">
                         <h2 className='text-2xl text-secondary font-bold' >Give Feedback</h2>
@@ -68,9 +71,7 @@ const AddReview = () => {
                     </div>
                 </form>
             </div>
-            <div className='w-3/4 '>
-                <img src={img} alt="" />
-            </div>
+
         </div>
     );
 };

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify'
 
 const AdminPannel = ({ user, refetch }) => {
-    console.log(user);
+
     const [deleteUser, setDeleteuser] = useState([])
     const { _id, email, role } = user
 
@@ -49,13 +49,8 @@ const AdminPannel = ({ user, refetch }) => {
 
                 <td>{email}</td>
                 <td>{role !== "admin" && <button onClick={makeAdmin} className='btn btn-xs btn-primary'>Make admin</button>}</td>
-                <td><button className='btn btn-xs btn-error' ><label for="my-modal"  >Remove User</label></button></td>
+                <td><button className='btn btn-xs btn-primary' ><label for="my-modal"  >Remove User</label></button></td>
             </tr>
-            {/* user delete confirmation modal */}
-
-
-
-
             <input type="checkbox" id="my-modal" class="modal-toggle" />
             <div class="modal">
                 <div class="modal-box relative">
