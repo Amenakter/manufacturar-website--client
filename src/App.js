@@ -20,6 +20,7 @@ import Review from './Component/pages/Review';
 import Navber from './Component/Shered/Navber';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Payment from './Component/Dashboard/Payment';
 
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
             <Route path='addProduct' element={<AddInventory />}></Route>
             <Route path='makeAdmin' element={<AddAdmin />}></Route>
             <Route path='manageProducts' element={<ManageProducts />}></Route>
+            <Route path='payment/:id' element={<Payment />}></Route>
           </Route>
 
         </Routes>
