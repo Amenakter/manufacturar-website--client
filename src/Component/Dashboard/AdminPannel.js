@@ -7,7 +7,7 @@ const AdminPannel = ({ user, refetch }) => {
     const { _id, email, role } = user
 
     const makeAdmin = () => {
-        fetch(`http://localhost:5000/user/admin/${email}`, {
+        fetch(`https://damp-meadow-76424.herokuapp.com/user/admin/${email}`, {
             method: "PUT",
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -29,7 +29,7 @@ const AdminPannel = ({ user, refetch }) => {
     const HandleDeleteUser = id => {
 
         console.log(id);
-        const url = `http://localhost:5000/user/${id}`;
+        const url = `https://damp-meadow-76424.herokuapp.com/user/${id}`;
         fetch(url, {
             method: "DELETE",
         })

@@ -8,7 +8,7 @@ const Review = () => {
     console.log(user);
 
     useEffect(() => {
-        fetch('http://localhost:5000/reveiws')
+        fetch('https://damp-meadow-76424.herokuapp.com/reveiws')
             .then(res => res.json())
             .then(data => {
                 setReviews(data);

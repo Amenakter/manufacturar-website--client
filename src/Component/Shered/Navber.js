@@ -101,7 +101,6 @@ const Navber = ({ children }) => {
                         {/* <!-- Sidebar content here --> */}
                         <li><NavLink to='/' className='rounded-lg'>Home</NavLink ></li>
                         <li><NavLink to='/dashboard' className='rounded-lg'>Dashboard</NavLink ></li>
-                        <li><NavLink to='/about' className='rounded-lg'>About</NavLink ></li>
                         <li><NavLink to='/review' className='rounded-lg'>Review</NavLink ></li>
                         <li><NavLink to='/inventory' className='rounded-lg'>Inventory</NavLink ></li>
                         <li><NavLink to='/portfolio' className='rounded-lg'>Portfolio</NavLink ></li>

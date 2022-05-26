@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import Loading from '../Shered/Loading'
 
 const ManageProducts = () => {
-    const { data: products, isLoading, refetch } = useQuery('product', () => fetch('http://localhost:5000/products').then(res => res.json()))
+    const { data: products, isLoading, refetch } = useQuery('product', () => fetch('https://damp-meadow-76424.herokuapp.com/products').then(res => res.json()))
     if (isLoading) {
         return <Loading></Loading>
     }

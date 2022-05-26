@@ -7,7 +7,7 @@ const DeleteOrder = ({ order, refetch }) => {
 
     const handleDeleteOrder = (id) => {
         console.log(id);
-        fetch(`http://localhost:5000/orders/${id}`, {
+        fetch(`https://damp-meadow-76424.herokuapp.com/orders/${id}`, {
             method: "DELETE",
         })
             .then(res => res.json())

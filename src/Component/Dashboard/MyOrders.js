@@ -12,7 +12,7 @@ const MyOrders = () => {
 
 
     const email = user.email
-    const { data: orders, refetch } = useQuery(['oders', email], () => fetch(`http://localhost:5000/order?email=${email}`, {
+    const { data: orders, refetch } = useQuery(['oders', email], () => fetch(`https://damp-meadow-76424.herokuapp.com/order?email=${email}`, {
         method: "GET",
         headers: {
             'authorization': `Bearer ${localStorage.getItem('accessToken')}`

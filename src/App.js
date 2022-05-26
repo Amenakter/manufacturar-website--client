@@ -9,7 +9,6 @@ import ManageAllOrder from './Component/Dashboard/ManageAllOrder';
 import ManageProducts from './Component/Dashboard/ManageProducts';
 import MyOrders from './Component/Dashboard/MyOrders';
 import MyProfile from './Component/Dashboard/MyProfile';
-import About from './Component/pages/About';
 import Home from './Component/pages/Home/Home';
 import Login from './Component/pages/Login';
 import Purchase from './Component/pages/Purchase';
@@ -32,7 +31,6 @@ function App() {
         <Routes>
           <Route path='/' element={<Home></Home>} />
           <Route path='/review' element={<Review></Review>}></Route>
-          <Route path='/about' element={<About></About>}></Route>
           <Route path='/login' element={<Login></Login>}></Route>
           <Route path='/register' element={<Register></Register>}></Route>
           <Route path='/portfolio' element={<Portfolio></Portfolio>}></Route>

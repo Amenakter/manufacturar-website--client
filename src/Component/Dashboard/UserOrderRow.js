@@ -8,7 +8,7 @@ const UserOrderRow = ({ order, index, refetch }) => {
 
     const handleDeleteUserOrder = (id) => {
 
-        fetch(`http://localhost:5000/orders/${id}`, {
+        fetch(`https://damp-meadow-76424.herokuapp.com/orders/${id}`, {
             method: "DELETE",
             headers: {
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`

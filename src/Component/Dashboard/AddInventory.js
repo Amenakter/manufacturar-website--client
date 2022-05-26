@@ -16,7 +16,7 @@ const AddInventory = () => {
             image: uploadimage
         }
         console.log(addItem);
-        const res = await axios.post('http://localhost:5000/addProducts', addItem)
+        const res = await axios.post('https://damp-meadow-76424.herokuapp.com/addProducts', addItem)
         console.log(res.data);
         reset();
     };

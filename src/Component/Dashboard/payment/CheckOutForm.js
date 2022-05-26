@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import { async } from '@firebase/util';
 import Loading from '../../Shered/Loading';
 
 
@@ -17,7 +16,7 @@ const CheckOutForm = ({ orders }) => {
 
 
     useEffect(() => {
-        fetch('http://localhost:5000/create-payment-intent', {
+        fetch('https://damp-meadow-76424.herokuapp.com/create-payment-intent', {
             method: "POST",
             headers: {
                 'content-type': "application/json",
@@ -85,7 +84,7 @@ const CheckOutForm = ({ orders }) => {
             orderId: _id,
             transactionId: paymentIntent.id,
         }
-        fetch(`http://localhost:5000/order/${_id}`, {
+        fetch(`https://damp-meadow-76424.herokuapp.com/order/${_id}`, {
             method: "PATCH",
             headers: {
                 'content-type': "application/json",
@@ -101,7 +100,7 @@ const CheckOutForm = ({ orders }) => {
 
     }
     return (
-        <div>
+        <div className=''>
             <form onSubmit={handleSubmit}>
                 <CardElement
                     options={{
@@ -119,8 +118,8 @@ const CheckOutForm = ({ orders }) => {
                         },
                     }}
                 />
-                <button type="submit" className='btn btn-xs btn-primary' disabled={!stripe || !clientSecret}>
-                    Pay
+                <button type="submit" className='btn  btn-primary mt-16' disabled={!stripe || !clientSecret}>
+                    Pay now
                 </button>
             </form>
             {

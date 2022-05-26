@@ -4,7 +4,7 @@ import Loading from '../Shered/Loading';
 import AdminPannel from './AdminPannel';
 
 const AddAdmin = () => {
-    const { data: users, isLoading, refetch } = useQuery('users', () => fetch('http://localhost:5000/allUser', {
+    const { data: users, isLoading, refetch } = useQuery('users', () => fetch('https://damp-meadow-76424.herokuapp.com/allUser', {
         method: "GET",
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`

@@ -23,7 +23,7 @@ const Purchase = () => {
             price: event?.target?.price?.value,
         }
         console.log(userOrder);
-        const url = 'http://localhost:5000/order'
+        const url = 'https://damp-meadow-76424.herokuapp.com/order'
         fetch(url, {
             method: "POST",
             headers: {
@@ -51,7 +51,7 @@ const Purchase = () => {
 
     }
     useEffect(() => {
-        fetch(`http://localhost:5000/products/${id}`)
+        fetch(`https://damp-meadow-76424.herokuapp.com/products/${id}`)
             .then(res => res.json())
             .then(data => {
                 setPurchasedata(data);

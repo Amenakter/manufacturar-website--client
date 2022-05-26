@@ -19,7 +19,7 @@ const Register = () => {
         return <Loading></Loading>
     }
     if (error || UpdateError || gError) {
-        authenticationError = <p>{error?.message || UpdateError?.message || gError?.message}</p>
+        authenticationError = <p className='text-red-500'>{error?.message || UpdateError?.message || gError?.message}</p>
     }
     if (token) {
         navigate('/')

@@ -5,7 +5,7 @@ const Products = ({ product, refetch }) => {
     const { _id, image, ProductName, price, description, avaliableQuentity, minimumQuentity } = product;
     const [deleteProduct, setDeleteProduct] = useState([])
     const handleDeleteProduct = id => {
-        const url = (`http://localhost:5000/products/${id}`);
+        const url = (`https://damp-meadow-76424.herokuapp.com/products/${id}`);
         fetch(url, {
             method: "DELETE",
         })

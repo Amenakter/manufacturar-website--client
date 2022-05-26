@@ -6,7 +6,7 @@ import Loading from '../Shered/Loading';
 import OrderRow from './OrderRow';
 
 const ManageAllOrder = () => {
-    const { data: allOrders, isLoading, refetch } = useQuery('users', () => fetch('http://localhost:5000/allOrders').then(res => res.json()))
+    const { data: allOrders, isLoading, refetch } = useQuery('users', () => fetch('https://damp-meadow-76424.herokuapp.com/allOrders').then(res => res.json()))
 
     if (isLoading) {
         return <Loading></Loading>

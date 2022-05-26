@@ -11,7 +11,7 @@ import CheckOutForm from './payment/CheckOutForm';
 const stripePromise = loadStripe('pk_test_51L1r9KHitP50iTcJUuCoZXer8MLXs2AIglemaYNcwGQbhzLsSAHZJtgvcUaUMNUS1o1yKrBLjpZo4Wp3XtYs19Mi00DI6N4r76');
 const Payment = () => {
     const { id } = useParams()
-    const url = `http://localhost:5000/order/${id}`
+    const url = `https://damp-meadow-76424.herokuapp.com/order/${id}`
     const { data: orders, isLoading } = useQuery('order', () => fetch(url, {
         method: "GET",
         headers: {
@@ -22,16 +22,17 @@ const Payment = () => {
         return <Loading></Loading>
     }
     return (
-        <div className=''>
+        <div className='flex flex-col justify-center items-center'>
             <div class="card w-96 bg-base-100 shadow-xl mb-8">
-                <div class="card-body">
-                    <h2 class="card-title">order summary</h2>
-                    <h2 class="card-title">{orders.name}</h2>
-                    <p> Product Name: <span>{orders.productname}</span></p>
-                    <p>price: <span> {orders.price} (per unit piece)</span></p>
-                    <p>Order Quentity: <span>{orders.userQuentity}</span></p>
-                    <p>Total Price: <span>{orders.userQuentity * orders.price}</span></p>
-                    <p>If Everything is ok please Confirm order.</p>
+                <div class="card-body ">
+                    <h2 class="card-title text-primary font-bold ml-16">Order Summary</h2>
+                    <div className='divider'></div>
+                    <h2 class="card-title text-secondary">{orders.name}</h2>
+                    <p className='text-primary font-bold'> Product Name: <span className='text-secondary font-bold'>{orders.productname}</span></p>
+                    <p className='text-primary font-bold'>price: <span className='text-secondary font-bold'> {orders.price} (per unit piece)</span></p>
+                    <p className='text-primary font-bold'>Order Quentity: <span className='text-secondary font-bold'>{orders.userQuentity}</span></p>
+                    <p className='text-primary font-bold'>Total Price: <span className='text-secondary font-bold'>{orders.userQuentity * orders.price}</span></p>
+                    <p className='text-primary font-bold'>If Everything is ok please Confirm order.</p>
                 </div>
             </div>
             <div class="card w-96 bg-base-100 shadow-xl">

@@ -19,7 +19,7 @@ const AddReview = () => {
         }
         console.log(userReview);
 
-        fetch('http://localhost:5000/reviews', {
+        fetch('https://damp-meadow-76424.herokuapp.com/reviews', {
             method: "POST",
             headers: {
                 'content-type': 'application/json',
