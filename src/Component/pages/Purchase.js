@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useParams } from 'react-router-dom';
 import auth from '../../firebase.intit';
+import { toast } from "react-toastify";
 
 const Purchase = () => {
     const { id } = useParams()
@@ -31,9 +32,7 @@ const Purchase = () => {
             body: JSON.stringify(userOrder)
         })
             .then(res => res.json())
-            .then(data => {
-                console.log(data);
-            })
+        toast.success('Order Completed')
         // const availableQuentity = event?.target?.availablequentity?.value
         // const minimumQuentity = event?.target?.miniquentity?.value
         // const userQuentity = event?.target?.userquentity?.value
@@ -46,7 +45,9 @@ const Purchase = () => {
         // else {
         //     toast.error("You cann't order less then minimum Quentity and upto available quentity")
         // }
-
+        event.target.phone.value = "";
+        event.target.address.value = '';
+        event.target.userquentity.value = ''
 
     }
     useEffect(() => {

@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const Products = ({ product, refetch }) => {
     const { _id, image, ProductName, price, description, avaliableQuentity, minimumQuentity } = product;
     const [deleteProduct, setDeleteProduct] = useState([])
     const handleDeleteProduct = id => {
-        console.log(id);
         const url = (`http://localhost:5000/products/${id}`);
         fetch(url, {
             method: "DELETE",
-
         })
             .then(res => res.json())
             .then(data => {
@@ -16,7 +15,8 @@ const Products = ({ product, refetch }) => {
                 if (data.deletedCount > 0) {
                     const remainignProduct = deleteProduct.filter(pro => pro._id !== id)
                     refetch();
-                    setDeleteProduct(remainignProduct)
+                    setDeleteProduct(remainignProduct);
+                    toast.error('deleted')
                 }
             })
     }

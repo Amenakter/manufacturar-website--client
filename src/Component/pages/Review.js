@@ -16,11 +16,13 @@ const Review = () => {
     }, [user])
 
     return (
-        <div>
-            <h2>total reviews:{reviews.length}</h2>
+        <div className='mb-16'>
+            <h2 className='text-4xl text-primary text-center mt-16'>Customer Review</h2>
+
+            <div className='divider'></div>
             <div className='grid grid-cols-1 lg:grid-cols-3 gap-5'>
                 {
-                    reviews.map(review =>
+                    reviews.slice(0, 3).map(review =>
                         <div className="card lg:w-lg bg-base-100 shadow-xl  mt-16">
                             <div className="card-body">
                                 <div className='ml-4'>

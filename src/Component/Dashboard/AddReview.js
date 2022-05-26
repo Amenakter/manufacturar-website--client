@@ -2,6 +2,7 @@ import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.intit';
 import img from "../../images/2456038.jpg"
+import { toast } from 'react-toastify';
 
 const AddReview = () => {
     const [user] = useAuthState(auth)
@@ -28,10 +29,9 @@ const AddReview = () => {
 
         })
             .then(res => res.json())
-            .then(data => {
-                console.log(data);
-            })
-
+        toast.success('Thanks For Four Greatfull Review.🤩')
+        event.target.rating.value = ""
+        event.target.review.value = ''
 
 
 

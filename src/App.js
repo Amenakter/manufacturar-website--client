@@ -21,6 +21,7 @@ import Navber from './Component/Shered/Navber';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Payment from './Component/Dashboard/Payment';
+import NotFound from './Component/Shered/NotFound';
 
 
 function App() {
@@ -59,7 +60,7 @@ function App() {
             <Route path='manageProducts' element={<ManageProducts />}></Route>
             <Route path='payment/:id' element={<Payment />}></Route>
           </Route>
-
+          <Route path='*' element={<NotFound></NotFound>}></Route>
         </Routes>
 
       </Navber>
