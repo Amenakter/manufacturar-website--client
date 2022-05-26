@@ -1,0 +1,18 @@
+.blog-container {
+    border: 1px solid rgb(196, 196, 196);
+    border-radius: 8px;
+    margin-bottom: 20px;
+
+}
+
+.blog {
+    border-radius: 8px;
+    padding: 30px 15px;
+    background-color: rgb(239, 241, 251);
+    margin: 20px;
+
+}
+
+.blog p {
+    line-height: 30px;
+}

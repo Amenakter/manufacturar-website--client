@@ -25,12 +25,12 @@ const Portfolio = () => {
                 </div>
 
             </div>
-            <span className='mt-16 text-center text-2xl text-primary font-bold'>My live Web Project</span>
+            <span className='mt-16 text-center text-2xl text-primary font-bold'>My Live Web Project</span>
             <div className='divider'></div>
             <div className='p-8'>
                 <ul className="mb-16 text-center ">
                     <a href="https://warehouse-management-3d44d.web.app/" className='mb-8   font-bold'>  Warehouse Management :<span className='text-secondary'> :https://warehouse-management-3d44d.web.app/</span> </a> <br />
-                    <a href="https://independence-service-provider.web.app/" className='mb-8   font-bold'>  Warehouse Management :<span className='text-secondary'> :https://independence-service-provider.web.app/</span> </a><br />
+                    <a href="https://independence-service-provider.web.app/" className='mb-8   font-bold'> Independence service workser:<span className='text-secondary'> :https://independence-service-provider.web.app/</span> </a><br />
                     <a href="https://suspicious-bose-1bc155.netlify.app/" className='mb-8   font-bold'>  Simple Bootstrap :<span className='text-secondary'> website:https://suspicious-bose-1bc155.netlify.app/</span> </a><br />
                     <a href="https://willowy-flan-7811ae.netlify.app/" className='mb-8   font-bold'>  Simple website :<span className='text-secondary'>:https://willowy-flan-7811ae.netlify.app/</span> </a> <br />
                     <a href="https://kind-kalam-5ed477.netlify.app/" className='mb-8   font-bold'>  Hotel Management :<span className='text-secondary'>:https://kind-kalam-5ed477.netlify.app/</span> </a><br />

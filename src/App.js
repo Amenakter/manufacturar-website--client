@@ -22,6 +22,7 @@ import Payment from './Component/Dashboard/Payment';
 import NotFound from './Component/Shered/NotFound';
 import RequireAdmin from './Component/Authentication/RequireAdmin';
 import Portfolio from './Component/pages/Home/Portfolio';
+import Blog from './Component/pages/Home/Blog';
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
           <Route path='/login' element={<Login></Login>}></Route>
           <Route path='/register' element={<Register></Register>}></Route>
           <Route path='/portfolio' element={<Portfolio></Portfolio>}></Route>
+          <Route path='/blog' element={<Blog></Blog>}></Route>
           <Route path='/purchase/:id' element={
             <RequiredAuth>
               <Purchase></Purchase>
