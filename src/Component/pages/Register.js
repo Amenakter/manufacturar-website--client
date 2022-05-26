@@ -10,7 +10,7 @@ import Loading from '../Shered/Loading';
 const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
-    const [createUserWithEmailAndPassword, user, loading, error,] = useCreateUserWithEmailAndPassword(auth);
+    const [createUserWithEmailAndPassword, user, loading, error,] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
     const [updateProfile, updating, UpdateError] = useUpdateProfile(auth);
     const navigate = useNavigate()
     const [token] = useToken(user || gUser);
@@ -34,6 +34,7 @@ const Register = () => {
         if (password === ConfirmPassword) {
             await createUserWithEmailAndPassword(email, password)
             await updateProfile({ displayName: name })
+            toast(' Already Sent a verification mail')
         }
         else {
             toast("Password not matching")
@@ -43,7 +44,7 @@ const Register = () => {
     };
     return (
         <div>
-            <div class="hero h-screen bg-base-100">
+            <div class="hero h-screen bg-base-100 mt-20">
                 <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-neutral">
                     <div class="card-body">
                         <h2 className='text-2xl font-bold text-center'>Please Register</h2>

@@ -33,6 +33,8 @@ const Login = () => {
         signInWithEmailAndPassword(data.email, data.password)
         reset();
     };
+
+
     return (
         <div>
             <div class="hero h-screen bg-base-100">
@@ -48,6 +50,7 @@ const Login = () => {
                                     type="text"
                                     placeholder="email"
                                     class="input input-bordered"
+                                    name='email'
                                     {...register("email", {
                                         required: {
                                             value: true,
@@ -90,7 +93,7 @@ const Login = () => {
                                 </label>
                             </div>
                             <div class="label">
-                                <span class="label-text-alt link text-xs font-bold text-red-500">Forgot password?</span>
+                                <span class="label-text-alt link text-xs font-bold text-red-500" >Forgot password?</span>
                             </div>
                             <div class="label">
                                 <p className='label-text  font-bold '>If Haven't Account, <Link to="/register" class="label-text-alt link text-xs font-bold text-success">Create an Account</Link></p>

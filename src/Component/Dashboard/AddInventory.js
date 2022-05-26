@@ -4,7 +4,7 @@ import axios from 'axios';
 
 
 const AddInventory = () => {
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const [uploadimage, setUploadImage] = useState('');
     const onSubmit = async (data) => {
         const addItem = {
@@ -47,9 +47,15 @@ const AddInventory = () => {
                                 type="text"
                                 placeholder="name"
                                 class="input input-bordered"
-                                {...register("name")}
-                            />
+                                {...register("name", {
+                                    required: {
+                                        value: true,
+                                        message: "name is requireds"
+                                    }
 
+                                })}
+                            />
+                            {errors.name?.type === 'required' && <span className="label-text-alt text-red-500 font-bold">{errors.name.message}</span>}
                         </div>
 
                         <div class="form-control">
@@ -60,9 +66,15 @@ const AddInventory = () => {
                                 type="text"
                                 placeholder="price"
                                 class="input input-bordered"
-                                {...register("price",)}
-                            />
+                                {...register("Price", {
+                                    required: {
+                                        value: true,
+                                        message: "Price is requireds"
+                                    }
 
+                                })}
+                            />
+                            {errors.price?.type === 'required' && <span className="label-text-alt text-red-500 font-bold">{errors.price.message}</span>}
                         </div>
                         <div class="form-control">
                             <label class="label">
@@ -71,9 +83,16 @@ const AddInventory = () => {
                             <input type="text"
                                 placeholder="quentity"
                                 class="input input-bordered"
-                                {...register("availableQuentity",)}
-                            />
+                                {...register("availableQuentity", {
+                                    required: {
+                                        value: true,
+                                        message: "Email is requireds"
+                                    }
 
+                                })}
+
+                            />
+                            {errors.availableQuentity?.type === 'required' && <span className="label-text-alt text-red-500 font-bold">{errors.availableQuentity.message}</span>}
                         </div>
                         <div class="form-control">
                             <label class="label">
@@ -82,9 +101,16 @@ const AddInventory = () => {
                             <input type="text"
                                 placeholder="quentity"
                                 class="input input-bordered"
-                                {...register("minimumQuentity",)}
-                            />
+                                {...register("minimumQuentity", {
+                                    required: {
+                                        value: true,
+                                        message: "Email is requireds"
+                                    }
 
+                                })}
+
+                            />
+                            {errors.minimumQuentity?.type === 'required' && <span className="label-text-alt text-red-500 font-bold">{errors.minimumQuentity.message}</span>}
                         </div>
                         <div class="form-control">
                             <label class="label">
@@ -93,9 +119,16 @@ const AddInventory = () => {
                             <input type="text"
                                 placeholder="description"
                                 class="input input-bordered"
-                                {...register("description",)}
-                            />
+                                {...register("description", {
+                                    required: {
+                                        value: true,
+                                        message: "Email is requireds"
+                                    }
 
+                                })}
+
+                            />
+                            {errors.description?.type === 'required' && <span className="label-text-alt text-red-500 font-bold">{errors.description.message}</span>}
                         </div>
                         <div class="form-control">
                             <label class="label  " >
@@ -104,7 +137,6 @@ const AddInventory = () => {
                             <input type="file"
                                 className='btn btn-primary'
                                 onChange={handleUploadImage}
-
                                 name='image' />
 
                         </div>
