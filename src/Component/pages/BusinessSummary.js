@@ -11,7 +11,7 @@ const BusinessSummary = () => {
                     <div className='lg:flex sm:flex-row  justify-between'>
                         <div className='flex flex-col justify-center items-center'>
                             <div class="avatar placeholder">
-                                <div class="bg-info rounded-full  w-32">
+                                <div class="bg-info rounded-full  w-28">
                                     <i class="fa-solid fa-hand-holding-droplet text-6xl text-white "></i>
                                 </div>
                             </div>
@@ -20,7 +20,7 @@ const BusinessSummary = () => {
                         </div>
                         <div className='flex flex-col justify-center items-center'>
                             <div class="avatar placeholder">
-                                <div class="bg-info text-warning-content rounded-full w-32">
+                                <div class="bg-info text-warning-content rounded-full w-28">
                                     <i class="fa-solid fa-star text-white text-2xl"></i>
                                     <i class="fa-solid fa-star text-white text-2xl"></i>
                                     <i class="fa-solid fa-star text-white text-2xl"></i>
@@ -32,7 +32,7 @@ const BusinessSummary = () => {
                         </div>
                         <div className='flex flex-col justify-center items-center'>
                             <div class="avatar placeholder">
-                                <div class="bg-info text-warning-content rounded-full w-32">
+                                <div class="bg-info text-warning-content rounded-full w-28">
                                     <i class="fa-solid fa-screwdriver-wrench text-6xl text-white"></i>
                                 </div>
                             </div>
@@ -41,7 +41,7 @@ const BusinessSummary = () => {
                         </div>
                         <div className='flex flex-col justify-center items-center'>
                             <div class="avatar placeholder">
-                                <div class="bg-info text-warning-content rounded-full w-32">
+                                <div class="bg-info text-warning-content rounded-full w-28">
                                     <i class="fa-solid fa-users text-6xl text-white"></i>
                                 </div>
                             </div>

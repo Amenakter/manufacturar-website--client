@@ -22,7 +22,7 @@ const Review = () => {
             <div className='divider'></div>
             <div className='grid grid-cols-1 lg:grid-cols-3 gap-5'>
                 {
-                    reviews.slice(0, 3).map(review =>
+                    reviews.map(review =>
                         <div className="card lg:w-lg bg-base-100 shadow-xl  mt-16">
                             <div className="card-body">
                                 <div className='ml-4'>

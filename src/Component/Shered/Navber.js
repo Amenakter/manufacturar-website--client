@@ -52,8 +52,7 @@ const Navber = ({ children }) => {
                                 <li><NavLink to='/dashboard/myOrder' className='rounded-lg'>Dashboard</NavLink ></li>
                                 <li><NavLink to='/about' className='rounded-lg'>About</NavLink ></li>
                                 <li><NavLink to='/review' className='rounded-lg'>Review</NavLink ></li>
-                                <li><NavLink to='/inventory' className='rounded-lg'>Inventory</NavLink ></li>
-                                <li><NavLink to='/summary' className='rounded-lg'>Business Summary</NavLink ></li>
+                                <li><NavLink to='/portfolio' className='rounded-lg'>Portfolio</NavLink ></li>
                                 {
                                     user ?
                                         <li>
@@ -73,7 +72,7 @@ const Navber = ({ children }) => {
                                     <ul tabindex="0"
                                         class="dropdown-content menu p-2 shadowx bg-base-100 rounded-box w-52">
                                         {user ?
-                                            <li className='mb-4'><NavLink to='/profile'>Your Profile</NavLink></li>
+                                            <NavLink to='/profile' className='rounded-lg' onClick={userSingOut}>Profile</NavLink >
                                             :
                                             <li><NavLink to='/register'>Register</NavLink></li>
 
@@ -104,14 +103,25 @@ const Navber = ({ children }) => {
                         <li><NavLink to='/about' className='rounded-lg'>About</NavLink ></li>
                         <li><NavLink to='/review' className='rounded-lg'>Review</NavLink ></li>
                         <li><NavLink to='/inventory' className='rounded-lg'>Inventory</NavLink ></li>
-                        <li><NavLink to='/summary' className='rounded-lg'>Business Summary</NavLink ></li>
-                        <li><NavLink to='/login' className='rounded-lg'>Login</NavLink ></li>
+                        <li><NavLink to='/portfolio' className='rounded-lg'>Portfolio</NavLink ></li>
+                        {user ?
+                            <NavLink to='/login' className='rounded-lg' onClick={userSingOut}>SignOut</NavLink >
+                            :
+                            <li><NavLink to='/login' className='rounded-lg'>Login</NavLink ></li>
+
+                        }
+
                         <div tabindex="0" class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box">
                             <div class="collapse-title text-xl font-medium">
                                 Settings
                             </div>
                             <div class="collapse-content ">
-                                <li className='mb-4'><NavLink to='/profile'>Your Profile</NavLink></li>
+                                {user ?
+                                    <NavLink to='/profile' className='rounded-lg' onClick={userSingOut}>Profile</NavLink >
+                                    :
+                                    <li><NavLink to='/register' className='rounded-lg'>Register</NavLink ></li>
+
+                                }
                                 <li>
                                     <label class="swap swap-rotate bg-info">
                                         <input type="checkbox" onClick={() => setDark(!dark)} />
@@ -125,8 +135,8 @@ const Navber = ({ children }) => {
                     </ul>
 
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 };
 
