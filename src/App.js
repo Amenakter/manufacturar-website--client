@@ -10,7 +10,6 @@ import ManageProducts from './Component/Dashboard/ManageProducts';
 import MyOrders from './Component/Dashboard/MyOrders';
 import MyProfile from './Component/Dashboard/MyProfile';
 import About from './Component/pages/About';
-import BusinessSummary from './Component/pages/BusinessSummary';
 import Home from './Component/pages/Home/Home';
 import Login from './Component/pages/Login';
 import Purchase from './Component/pages/Purchase';
@@ -22,6 +21,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Payment from './Component/Dashboard/Payment';
 import NotFound from './Component/Shered/NotFound';
 import RequireAdmin from './Component/Authentication/RequireAdmin';
+import Portfolio from './Component/pages/Home/Portfolio';
 
 
 function App() {
@@ -34,6 +34,7 @@ function App() {
           <Route path='/about' element={<About></About>}></Route>
           <Route path='/login' element={<Login></Login>}></Route>
           <Route path='/register' element={<Register></Register>}></Route>
+          <Route path='/portfolio' element={<Portfolio></Portfolio>}></Route>
           <Route path='/purchase/:id' element={
             <RequiredAuth>
               <Purchase></Purchase>
