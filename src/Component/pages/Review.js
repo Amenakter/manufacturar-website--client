@@ -17,7 +17,7 @@ const Review = () => {
 
     return (
         <div className='mb-16'>
-            <h2 className='text-4xl text-primary text-center mt-16'>Customer Review</h2>
+            <h2 className='text-4xl text-primary text-center mt-16 font-bold'>Customer Review</h2>
 
             <div className='divider'></div>
             <div className='grid grid-cols-1 lg:grid-cols-3 gap-5'>

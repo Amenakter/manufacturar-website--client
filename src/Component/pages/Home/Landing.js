@@ -1,20 +1,24 @@
 import React from 'react';
+import b1 from '../../../images/b.png';
+import b2 from '../../../images/b2.png';
+import b3 from '../../../images/b3.png';
+import b4 from '../../../images/b4.png';
 
 const Landing = () => {
     return (
         <div>
             <div class="carousel w-full">
                 <div id="item1" class="carousel-item w-full">
-                    <img src="https://api.lorem.space/image/car?w=800&h=200&hash=8B7BCDC2" class="w-full" />
+                    <img src={b1} class="w-full" alt='' />
                 </div>
                 <div id="item2" class="carousel-item w-full">
-                    <img src="https://api.lorem.space/image/car?w=800&h=200&hash=500B67FB" class="w-full" />
+                    <img height='200px' src={b2} class="w-full" alt='' />
                 </div>
                 <div id="item3" class="carousel-item w-full">
-                    <img src="https://api.lorem.space/image/car?w=800&h=200&hash=A89D0DE6" class="w-full" />
+                    <img src={b3} class="w-full" alt='' />
                 </div>
                 <div id="item4" class="carousel-item w-full">
-                    <img src="https://api.lorem.space/image/car?w=800&h=200&hash=225E6693" class="w-full" />
+                    <img src={b4} class="w-full" alt='' />
                 </div>
             </div>
             <div class="flex justify-center w-full py-2 gap-2">
